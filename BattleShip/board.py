@@ -45,7 +45,13 @@ class Board(object):
     def is_in_bounds(self, row: int, col: int) -> bool:
         return (0 <= row < self.num_rows and
                 0 <= col < self.num_cols)
-
+    def fire(self,row,col):
+        if self.Board[row][col] == "*":
+            self.Board[row][col] == "x"
 #######################################################################################################################
-ownBoard = Board(5,5,"*")
-print(ownBoard)
+# ownBoard = Board(5,5,"*")
+# print(ownBoard)
+# ownBoard[0][3] = "j"
+# print(ownBoard)
+# ownBoard.fire(0,3)
+# print(ownBoard)
