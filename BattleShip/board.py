@@ -49,6 +49,8 @@ class Board(object):
         if self.Board[row][col] == "*":
             self.Board[row][col] == "x"
 
+    def place_ship_on_board
+
 
     def display_board(self):
         return self.Board

@@ -1,11 +1,12 @@
 from typing import Iterable
 from .board import Board
+from .game import BattleShipGame
 
 class Player(object):
     def __init__(self,other_players: Iterable["Player"],num_rows:int,num_cols:int, blank_char: str= "*") -> None:
         self.name = self.get_name_from_player(other_players)
         self.board = Board(num_rows,num_cols,blank_char)
-        self.ownedships = []
+        self.owned_ships = []
 
 
     def get_name_from_player(self,other_player: Iterable["Player"])->str:
@@ -45,5 +46,17 @@ class Player(object):
                  self.orientation = str(input("Do you want your ship to be placed horizontal or vertical?"))
             return self.orientation
 
+    def add_to_owned_ships(self):
+        file_path = open(sys.argv[1])
+        num_rows, num_cols = file_path.readline().split()
+        line = file_path.readline()
+        self.owned_ships = []
+        while line != "":
+            name, length = line.split()
+            self.owned_ships.append([name, length])
+            line = file_path.readline()
+        return 
 
-Ship(name,length)
+
+
+
