@@ -111,11 +111,11 @@ class BattleShipGame(object):
             for e in i:
                 
 
-            #     self.ship_orientation()
-            #     self.ship_coordinates()
-            # f = 0
-            # for i in self.shipconfig:
-            #     for j in i:
-            #         self.shipObjectList.append(self.shipconfig[f][j])
-            #         f+=1
-            #     print(self.shipObjectList)
+                 self.ship_orientation()
+                 self.ship_coordinates()
+             f = 0
+             for i in self.shipconfig:
+                 for j in i:
+                     self.shipObjectList.append(self.shipconfig[f][j])
+                     f+=1
+                 print(self.shipObjectList)
