@@ -109,7 +109,7 @@ class BattleShipGame(object):
         shipObjectLength=[]
         for i in self.shipconfig:
             for e in i:
-                
+
 
             #     self.ship_orientation()
             #     self.ship_coordinates()

@@ -5,6 +5,7 @@ class Player(object):
     def __init__(self,other_players: Iterable["Player"],num_rows:int,num_cols:int, blank_char: str= "*") -> None:
         self.name = self.get_name_from_player(other_players)
         self.board = Board(num_rows,num_cols,blank_char)
+        self.ownedships = []
 
 
     def get_name_from_player(self,other_player: Iterable["Player"])->str:
@@ -45,3 +46,4 @@ class Player(object):
             return self.orientation
 
 
+Ship(name,length)
