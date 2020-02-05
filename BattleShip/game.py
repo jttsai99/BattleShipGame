@@ -75,4 +75,4 @@ class BattleShipGame(object):
             return "enter horizontal or vertical"
 
     def get_coordinates(self)->tuple:
-        userinput = input(" ")
+        coordinates = input(" ")
