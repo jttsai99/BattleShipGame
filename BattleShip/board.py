@@ -48,6 +48,10 @@ class Board(object):
     def fire(self,row,col):
         if self.Board[row][col] == "*":
             self.Board[row][col] == "x"
+
+
+    def display_board(self):
+        return self.Board
 #######################################################################################################################
 # ownBoard = Board(5,5,"*")
 # print(ownBoard)
