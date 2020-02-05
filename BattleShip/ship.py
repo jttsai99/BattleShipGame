@@ -1,8 +1,10 @@
+from .player import Player
 class Ship(object):
-    def __init__(self,name:str,length,orientation,coordinates):
+    def __init__(self,name:str,length):
         self.name = name
         self.length = length
         self.orientation = orientation
+        self.coordinates = coordinates
         self.indshipcoordinates = self.ship_coordinate(length,orientation,coordinates)
         pass
     def __str__(self) -> str:

@@ -28,7 +28,7 @@ class BattleShipGame(object):
             name, length = line.split()
             self.shipconfig.append([name,length])
             line = file_path.readline()
-        #print(self.shipconfig)
+        print(self.shipconfig)
         return self.shipconfig
 
 #actually running the Game
@@ -99,19 +99,23 @@ class BattleShipGame(object):
         for player in self.players:
             self.getting_shipconfig_info()
 
-
     def set_up_placing_ships(self):
         #while current player is not done placing ships
          #   player
         pass
 
     def getting_shipconfig_info(self):
-        for i in range(len(self.shipconfig)):
-            for j in range(len(self.shipconfig[i])):
-                print(self.shipconfig[i][j])
+        shipObjectName=[]
+        shipObjectLength=[]
+        for i in self.shipconfig:
+            for e in i:
+                
 
-                # print(type_of_ship)
-                # print(ship_length)
-                # self.ship_orientation()
-                # self.ship_coordinates()
-                # Ship(type_of_ship,self.shipsconfig[ship_length],self.orientation,self.coordinates())
+            #     self.ship_orientation()
+            #     self.ship_coordinates()
+            # f = 0
+            # for i in self.shipconfig:
+            #     for j in i:
+            #         self.shipObjectList.append(self.shipconfig[f][j])
+            #         f+=1
+            #     print(self.shipObjectList)
