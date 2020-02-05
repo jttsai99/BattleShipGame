@@ -6,4 +6,4 @@ if __name__ == '__main__':
     num_rows,num_cols = input_file.readline().split()
     #print(num_rows,num_cols)
     game= BattleShipGame(int(num_rows),int(num_cols))
-    game.play()
+    game.start()

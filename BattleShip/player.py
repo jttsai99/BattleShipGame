@@ -5,7 +5,7 @@ class Player(object):
     def __init__(self,other_players: Iterable["Player"],num_rows:int,num_cols:int, blank_char: str= "*") -> None:
         self.name = self.get_name_from_player(other_players)
         self.board = Board(num_rows,num_cols,blank_char)
-        self.placedships = []
+
 
     def get_name_from_player(self,other_player: Iterable["Player"])->str:
         already_used_names = set([player.name for player in other_player])
@@ -26,7 +26,8 @@ class Player(object):
                 print(f'{self.coordinates} has been used. Pick another name.')
     def __str__(self) -> str:
         return self.name
-        return self.board
 
     def get_orientation(self):
         pass
+
+
