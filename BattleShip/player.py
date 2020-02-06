@@ -114,4 +114,5 @@ class Player(object):
 #actually making the ship object into a list of objects
     def adding_shipobj_to_player_list(self,orientation,coordinates):
         for i in range(len(self.shipinitials)):
-            print(Ship(self.shipinitials[i],self.shiplengths[i],self.orientation,self.coordinates))
+            self.owned_ships.append((Ship(self.shipinitials[i],self.shiplengths[i],self.orientation,self.coordinates)))
+        print("hello", self.owned_ships)
