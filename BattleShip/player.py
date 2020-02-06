@@ -10,7 +10,12 @@ class Player(object):
         self.board = Board(num_rows,num_cols,blank_char)
         self.return_ship_initials(self.shipconfig)
         self.return_ship_lengths(self.shipconfig)
-        self.owned_ships = self.adding_shipobj_to_player_list(orientation = "horizontal",coordinates=(0,0))
+        self.owned_ships = []
+        for ships_num in range(len(self.shipconfig)):
+            self.orientation = self.get_orientation()
+            self.coordinates = self.get_starting_coordinates()
+            self.adding_shipobj_to_player_list(self.orientation,self.coordinates)
+        print("hello bobo: ",self.owned_ships[0])
 
 
     def __str__(self) -> str:
@@ -23,13 +28,13 @@ class Player(object):
         num_rows, num_cols = file_path.readline().split()
         # print(num_rows, num_cols)
         line = file_path.readline()
-        self.shipconfig = []
+        shipconfig = []
         while line != "":
             name, length = line.split()
-            self.shipconfig.append([name, length])
+            shipconfig.append([name, length])
             line = file_path.readline()
-        print(self.shipconfig)
-        return self.shipconfig
+        print(shipconfig)
+        return shipconfig
 
 #ask player for their name
     def get_name_from_player(self,other_player: Iterable["Player"])->str:
@@ -52,7 +57,7 @@ class Player(object):
 
 #get coordinates
 #ask for coordinates from player
-    def ship_coordinates(self)->tuple:
+    def get_starting_coordinates(self)->tuple:
         coords = input(
             "Please give the coordinates where you would like to place the ship in row,column form."'\n')
         splitcoords = coords.split(sep=',')
@@ -111,8 +116,10 @@ class Player(object):
         return self.shiplengths
 
 
+    def create_ship_objects(self):
+        pass
+
 #actually making the ship object into a list of objects
     def adding_shipobj_to_player_list(self,orientation,coordinates):
-        for i in range(len(self.shipinitials)):
-            self.owned_ships.append((Ship(self.shipinitials[i],self.shiplengths[i],self.orientation,self.coordinates)))
-        print("hello", self.owned_ships)
+        for i in range(0,3):
+            self.owned_ships.append(Ship(self.shipinitials[i],int(self.shiplengths[i]),orientation,coordinates))

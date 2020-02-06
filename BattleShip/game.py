@@ -25,7 +25,7 @@ class BattleShipGame(object):
             name, length = line.split()
             self.shipconfig.append([name,length])
             line = file_path.readline()
-        print(self.shipconfig)
+        #print(self.shipconfig)
         return self.shipconfig
 
 #actually running the Game
