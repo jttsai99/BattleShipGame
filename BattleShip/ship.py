@@ -10,7 +10,6 @@ class Ship(object):
         return "The name is {}, the length is {}, the orientation is {}, and the coordinates are {}".format(self.name,self.length,self.orientation,self.coordinates)
 
 
-
 #takes in the object's length orientation and coordinates to create a list of all coordinates for ONE ship
     def ship_coordinates(self,length, orientation, coordinates)->list:
         counter = 1
@@ -31,3 +30,6 @@ class Ship(object):
 
 #a = Ship("M",2,"horizonal",(5,2))
 #print(a)
+
+#this needs to return some type of list of coordinates for one individual boat
+#we will write the rest in board i think
