@@ -15,18 +15,18 @@ class Ship(object):
     def ship_coordinates(self,length, orientation, coordinates)->list:
         counter = 1
         if orientation == "horizontal":
-            self.name_coords = [self.coordinates]
+            self.list_coords = [self.coordinates]
             for i in range(self.length):
-                self.name_coords.append((self.coordinates[0], self.coordinates[1] + counter))
+                self.list_coords.append((self.coordinates[0], self.coordinates[1] + counter))
                 counter += 1
-            return self.name_coords
+            return self.list_coords
 
         elif orientation == "vertical":
-            self.name_coords = [self.coordinates]
+            self.list_coords = [self.coordinates]
             for i in range(self.length):
-                self.name_coords.append((self.coordinates[0] + counter, self.coordinates[1]))
+                self.list_coords.append((self.coordinates[0] + counter, self.coordinates[1]))
                 counter += 1
-            return self.name_coords
+            return self.list_coords
 
 
 #a = Ship("M",2,"horizonal",(5,2))

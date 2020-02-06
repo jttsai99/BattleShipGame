@@ -1,4 +1,5 @@
 from typing import Iterator, List
+from .ship import Ship
 
 class Board(object):
     def __init__(self, num_rows: int, num_cols: int, blank_char: str) -> None:
@@ -47,10 +48,14 @@ class Board(object):
 
     def fire(self,row,col):
         if self.Board[row][col] == "*":
-            self.Board[row][col] == "x"
+            self.Board[row][col] == "o"
 
+    #input is a list of tuples containing coordinates where ship must be placed on board
+    #for example, list = [(0,0),(0,1),(0,2)]
     def place_ship_on_board(self,list):
-        pass
+        for i in list:
+            self.Board[i[0]][i[1]]= ship.marker
+        return self.Board
 
     def display_board(self):
         return self.Board

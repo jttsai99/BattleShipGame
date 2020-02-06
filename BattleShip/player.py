@@ -18,6 +18,7 @@ class Player(object):
             self.owned_ships.append(
                 Ship(self.shipname[i],self.shipinitials[i], int(self.shiplengths[i]), self.orientation, self.coordinates))
             self.display_own_board()
+
         print("hello bobo1: ", self.owned_ships[0])
         print("hello bobo2: ", self.owned_ships[1])
         print("hello bobo3: ", self.owned_ships[2])
@@ -136,3 +137,26 @@ class Player(object):
 
     def display_own_board(self):
         print(self.board)
+
+#####################################################################################
+#beginning gameplay methods
+
+    def get_shot_input(self):
+        self.inputshot = input(p1", enter the location you want to fire at in the form row, column:",sep = "")
+        self.x,self.y=self.inputshot.split(sep=",")
+        return (int(self.x),int(self.y))
+
+    # must replace other.board and p2 bc idk actual variable names for opponent and opponent's board
+    #also check destroy is not working properly
+    def check_shot_hit_miss(self):
+        if other.board[self.x][self.y]=="*":
+            other.board[self.x][self.y]="O"
+            return "Miss"
+        elif other.board[self.x][self.y] != "*" and other.board[self.x][self.y] != "X" and other.board[self.x][self.y] != "O":
+            for i in self.shipname:
+                if other.board[self.x][self.y]==i[0]:
+                    other.board[self.x][self.y] = "X"
+                    return "You hit {}'s {}!".format(p2,i)
+
+    def check_destroy(self):
+        pass
