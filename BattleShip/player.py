@@ -55,7 +55,7 @@ class Player(object):
             name, length = line.split()
             self.owned_ships.append([name, length])
             line = file_path.readline()
-        return 
+        return
 
 
 
