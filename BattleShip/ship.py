@@ -1,16 +1,18 @@
-from .player import Player
 class Ship(object):
-    def __init__(self,name:str,length):
+    def __init__(self,name:str,length,orientaion,coordinates):
         self.name = name
         self.length = length
-        self.orientation = orientation
+        self.orientation = orientaion
         self.coordinates = coordinates
-        self.indshipcoordinates = self.ship_coordinate(length,orientation,coordinates)
+        self.ship_coordinates = self.ship_coordinates(length,orientaion,coordinates)
         pass
     def __str__(self) -> str:
-        return(self.name)
+        return "The name is {}, the length is {}, the orientation is {}, and the coordinates are {}".format(self.name,self.length,self.orientation,self.coordinates)
 
-    def ship_coordinates(self,length, orientation, coordinates):
+
+
+#takes in the object's length orientation and coordinates to create a list of all coordinates for ONE ship
+    def ship_coordinates(self,length, orientation, coordinates)->list:
         counter = 1
         if orientation == "horizontal":
             self.name_coords = [self.coordinates]
@@ -27,6 +29,5 @@ class Ship(object):
             return self.name_coords
 
 
-# a = Ship("mouse",2,"horizonal",5,2)
-# a.ship_coordinates("horizontal",5,2)
-# print(a)
+#a = Ship("M",2,"horizonal",(5,2))
+#print(a)

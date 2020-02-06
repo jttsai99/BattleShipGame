@@ -1,6 +1,5 @@
 from typing import Iterator, List
 
-
 class Board(object):
     def __init__(self, num_rows: int, num_cols: int, blank_char: str) -> None:
         self.contents = [[blank_char for col in range(num_cols)] for row in range(num_rows)]
@@ -49,8 +48,8 @@ class Board(object):
         if self.Board[row][col] == "*":
             self.Board[row][col] == "x"
 
-    def place_ship_on_board
-
+    def place_ship_on_board(self):
+        pass
 
     def display_board(self):
         return self.Board
