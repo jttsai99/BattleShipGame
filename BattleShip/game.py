@@ -1,7 +1,4 @@
-from typing import Iterable, TypeVar
-from .board import Board
 from .player import Player
-from .ship import Ship
 import sys
 
 class BattleShipGame(object):
@@ -34,7 +31,7 @@ class BattleShipGame(object):
 #actually running the Game
     def start(self)-> None:
         #while not self.someone_won():
-        self.getting_shipconfig_info()
+        #self.getting_shipconfig_info()
         self.display_own_board()
             #self._cur_player.take_turn()
             #self.change_turn()
@@ -104,18 +101,16 @@ class BattleShipGame(object):
          #   player
         pass
 
-    def getting_shipconfig_info(self):
-        shipObjectName=[]
-        shipObjectLength=[]
-        for i in self.shipconfig:
-            for e in i:
-                
-
-                 self.ship_orientation()
-                 self.ship_coordinates()
-             f = 0
-             for i in self.shipconfig:
-                 for j in i:
-                     self.shipObjectList.append(self.shipconfig[f][j])
-                     f+=1
-                 print(self.shipObjectList)
+    # def getting_shipconfig_info(self):
+    #     shipObjectName=[]
+    #     shipObjectLength=[]
+    #     for i in self.shipconfig:
+    #         for e in i:
+    #             self.ship_orientation()
+    #             self.ship_coordinates()
+    #         f = 0
+    #         for i in self.shipconfig:
+    #              for j in i:
+    #                  self.shipObjectList.append(self.shipconfig[f][j])
+    #                  f+=1
+    #              print(self.shipObjectList)
