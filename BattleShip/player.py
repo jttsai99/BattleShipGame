@@ -5,19 +5,26 @@ import sys
 
 class Player(object):
     def __init__(self,other_players: Iterable["Player"],num_rows:int,num_cols:int, blank_char: str= "*") -> None:
-        self.shipconfig = self.read_config()
-        self.name = self.get_name_from_player(other_players)
-        self.board = Board(num_rows,num_cols,blank_char)
-        self.return_ship_name(self.shipconfig)
-        self.return_ship_initials(self.shipconfig)
-        self.return_ship_lengths(self.shipconfig)
-        self.owned_ships = []
-        for i in range(len(self.shipconfig)):
-            self.orientation = self.get_orientation()
-            self.coordinates = self.get_starting_coordinates()
+        self.shipconfig = self.read_config()        #reads config file and return [["Mouse",'1'],....]
+        self.name = self.get_name_from_player(other_players) #gets player name
+        self.board = Board(num_rows,num_cols,blank_char)    #initializes player's own board
+
+        self.return_ship_names(self.shipconfig)  #get a list of shipName
+        self.return_ship_initials(self.shipconfig) #get a list of shipInitials
+        self.return_ship_lengths(self.shipconfig)   #get a list of shipLengths
+
+        self.owned_ships = []   #creates a list for player's Owned ships
+        for i in range(len(self.shipconfig)):       #iterates the config specified amount of time eg: how many ships there
+            self.orientation = self.get_orientation(i)   #gets ship orientation by user input returns string
+            self.coordinates = self.get_starting_coordinates()  #get coordinates by user input return tuple
             self.owned_ships.append(
-                Ship(self.shipname[i],self.shipinitials[i], int(self.shiplengths[i]), self.orientation, self.coordinates))
+                Ship(self.shipnames[i],self.shipinitials[i], int(self.shiplengths[i]), self.orientation, self.coordinates))
+            #appends each ship to Owned Ship list by giving (name,initals,length,orientation,coordinates)
+
+
+            #places the ships on the board
             self.board.place_ship_on_board(self.owned_ships[i].ship_coordinates,self.owned_ships[i].get_ship_marker())
+            #displays the own board
             self.display_own_board()
 
         print(self.get_player_name())
@@ -75,13 +82,13 @@ class Player(object):
         return self.coordinates
 
 
-#ask for orientation from player
-    def get_orientation(self) -> str:
+#ask for orientation from player,
+    def get_orientation(self,i) -> str:
+        self.orientation = input("{} enter horizontal or vertical for orientation of {}  which is {} long: ".format(self.name,self.shipnames[i],self.shiplengths[i]))
+        while self.orientation not in "horizontal" and self.orientation not in "vertical":
+            print("ERROR: Your response must be a prefix of 'horizontal' or 'vertical'.")
             self.orientation = str(input("Do you want your ship to be placed horizontal or vertical?"))
-            # while self.orientation not in "horizontal" or self.orientation not in "vertical":
-            #      print("ERROR: Your response must be a prefix of 'horizontal' or 'vertical'.")
-            #      self.orientation = str(input("Do you want your ship to be placed horizontal or vertical?"))
-            return self.orientation
+        return self.orientation
 
 
     # def add_to_owned_ships(self):
@@ -94,18 +101,18 @@ class Player(object):
     #         self.owned_ships.append([name, length])
     #         line = file_path.readline()
     #     return
-
-    def return_ship_name(self,list):
+# converts our list of lists to a list of shipnames
+    def return_ship_names(self,list):
         self.first=[]
-        self.shipname = []
+        self.shipnames = []
         for i in list:
             for j in i:
                 self.first.append(j)
         for i in range(len(self.first)):
             if i %2 ==0:
-                self.shipname.append(self.first[i])
-        print(self.shipname)
-        return self.shipname
+                self.shipnames.append(self.first[i])
+        print(self.shipnames)
+        return self.shipnames
 
 #converts our list of lists to a list of first letters
     def return_ship_initials(self,list):
@@ -133,10 +140,10 @@ class Player(object):
         print(self.shiplengths)
         return self.shiplengths
 
-    def create_ship_objects(self):
-        pass
 
+#display player's Placement Board
     def display_own_board(self):
+        #print("{}'s Placement Board".format(self.name))
         print(self.board)
 
     #get the player's name

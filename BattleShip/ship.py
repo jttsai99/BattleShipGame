@@ -15,8 +15,8 @@ class Ship(object):
 #takes in the object's length orientation and coordinates to create a list of all coordinates for ONE ship
     def set_ship_coordinates(self,length, orientation, coordinates)->list:
         counter = 0
+        self.list_coords = []
         if orientation == "horizontal":
-            self.list_coords = [self.coordinates]
             for i in range(self.length):
                 self.list_coords.append((self.coordinates[0], self.coordinates[1] + counter))
                 counter += 1
@@ -24,7 +24,6 @@ class Ship(object):
             return self.list_coords
 
         elif orientation == "vertical":
-            self.list_coords = [self.coordinates]
             for i in range(self.length):
                 self.list_coords.append((self.coordinates[0] + counter, self.coordinates[1]))
                 counter += 1
