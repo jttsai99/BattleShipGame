@@ -17,8 +17,10 @@ class Player(object):
             self.coordinates = self.get_starting_coordinates()
             self.owned_ships.append(
                 Ship(self.shipname[i],self.shipinitials[i], int(self.shiplengths[i]), self.orientation, self.coordinates))
+            self.board.place_ship_on_board(self.owned_ships[i].ship_coordinates,self.owned_ships[i].get_ship_marker())
             self.display_own_board()
 
+        print(self.get_player_name())
         print("hello bobo1: ", self.owned_ships[0])
         print("hello bobo2: ", self.owned_ships[1])
         print("hello bobo3: ", self.owned_ships[2])
@@ -76,11 +78,10 @@ class Player(object):
 #ask for orientation from player
     def get_orientation(self) -> str:
             self.orientation = str(input("Do you want your ship to be placed horizontal or vertical?"))
+            # while self.orientation not in "horizontal" or self.orientation not in "vertical":
+            #      print("ERROR: Your response must be a prefix of 'horizontal' or 'vertical'.")
+            #      self.orientation = str(input("Do you want your ship to be placed horizontal or vertical?"))
             return self.orientation
-            #while self.orientation not in "horizontal" or self.orientation not in "vertical":
-             #    print("ERROR: Your response must be a prefix of 'horizontal' or 'vertical'.")
-             #    self.orientation = str(input("Do you want your ship to be placed horizontal or vertical?"))
-
 
 
     # def add_to_owned_ships(self):
@@ -138,17 +139,20 @@ class Player(object):
     def display_own_board(self):
         print(self.board)
 
+    #get the player's name
+    def get_player_name(self):
+        return self.name
 #####################################################################################
 #beginning gameplay methods
 
     def get_shot_input(self):
-        self.inputshot = input(p1", enter the location you want to fire at in the form row, column:",sep = "")
+        self.inputshot = input(p1,", enter the location you want to fire at in the form row, column:",sep = "")
         self.x,self.y=self.inputshot.split(sep=",")
         return (int(self.x),int(self.y))
 
     # must replace other.board and p2 bc idk actual variable names for opponent and opponent's board
     #also check destroy is not working properly
-    def check_shot_hit_miss(self):
+    def check_shot_hit_miss(self,other):
         if other.board[self.x][self.y]=="*":
             other.board[self.x][self.y]="O"
             return "Miss"

@@ -52,13 +52,19 @@ class Board(object):
 
     #input is a list of tuples containing coordinates where ship must be placed on board
     #for example, list = [(0,0),(0,1),(0,2)]
-    def place_ship_on_board(self,list):
+    #Actually places ships on the board
+    def place_ship_on_board(self, list, marker:str) -> None:
         for i in list:
-            self.Board[i[0]][i[1]]= ship.marker
-        return self.Board
+            self[i[0]][i[1]]= marker
+
+    # input is a list of tuples containing coordinates where ship must be placed on board
+    # for example, list = [(0,0),(0,1),(0,2)]
+    def ship_in_bounds(self,list):
+        pass
 
     def display_board(self):
         return self.Board
+
 #######################################################################################################################
 # ownBoard = Board(5,5,"*")
 # print(ownBoard)
