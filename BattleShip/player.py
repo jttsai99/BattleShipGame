@@ -8,14 +8,19 @@ class Player(object):
         self.shipconfig = self.read_config()
         self.name = self.get_name_from_player(other_players)
         self.board = Board(num_rows,num_cols,blank_char)
+        self.return_ship_name(self.shipconfig)
         self.return_ship_initials(self.shipconfig)
         self.return_ship_lengths(self.shipconfig)
         self.owned_ships = []
-        for ships_num in range(len(self.shipconfig)):
+        for i in range(len(self.shipconfig)):
             self.orientation = self.get_orientation()
             self.coordinates = self.get_starting_coordinates()
-            self.adding_shipobj_to_player_list(self.orientation,self.coordinates)
-        print("hello bobo: ",self.owned_ships[0])
+            self.owned_ships.append(
+                Ship(self.shipname[i],self.shipinitials[i], int(self.shiplengths[i]), self.orientation, self.coordinates))
+            self.display_own_board()
+        print("hello bobo1: ", self.owned_ships[0])
+        print("hello bobo2: ", self.owned_ships[1])
+        print("hello bobo3: ", self.owned_ships[2])
 
 
     def __str__(self) -> str:
@@ -88,38 +93,46 @@ class Player(object):
     #         line = file_path.readline()
     #     return
 
+    def return_ship_name(self,list):
+        self.first=[]
+        self.shipname = []
+        for i in list:
+            for j in i:
+                self.first.append(j)
+        for i in range(len(self.first)):
+            if i %2 ==0:
+                self.shipname.append(self.first[i])
+        print(self.shipname)
+        return self.shipname
 
 #converts our list of lists to a list of first letters
     def return_ship_initials(self,list):
-        self.firsts=[]
+        self.second=[]
         self.shipinitials = []
         for i in list:
             for j in i:
-                self.firsts.append(j[0])
-        for i in range(len(self.firsts)):
+                self.second.append(j[0])
+        for i in range(len(self.second)):
             if i %2 ==0:
-                self.shipinitials.append(self.firsts[i])
+                self.shipinitials.append(self.second[i])
         print(self.shipinitials)
         return self.shipinitials
 
 #converts our list of lists to a list of ship lengths
     def return_ship_lengths(self,list):
-        self.second=[]
+        self.third=[]
         self.shiplengths = []
         for i in list:
             for j in i:
-                self.second.append(j[0])
-        for i in range(len(self.second)):
+                self.third.append(j[0])
+        for i in range(len(self.third)):
             if i %2 ==1:
-                self.shiplengths.append(self.second[i])
+                self.shiplengths.append(self.third[i])
         print(self.shiplengths)
         return self.shiplengths
-
 
     def create_ship_objects(self):
         pass
 
-#actually making the ship object into a list of objects
-    def adding_shipobj_to_player_list(self,orientation,coordinates):
-        for i in range(len()):
-            self.owned_ships.append(Ship(self.shipinitials[i],int(self.shiplengths[i]),orientation,coordinates))
+    def display_own_board(self):
+        print(self.board)

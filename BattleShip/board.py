@@ -44,11 +44,12 @@ class Board(object):
     def is_in_bounds(self, row: int, col: int) -> bool:
         return (0 <= row < self.num_rows and
                 0 <= col < self.num_cols)
+
     def fire(self,row,col):
         if self.Board[row][col] == "*":
             self.Board[row][col] == "x"
 
-    def place_ship_on_board(self):
+    def place_ship_on_board(self,list):
         pass
 
     def display_board(self):
