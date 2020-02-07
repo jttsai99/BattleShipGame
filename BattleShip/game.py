@@ -79,22 +79,12 @@ class BattleShipGame(object):
     def check_win(self)-> bool:
         for i in range(self.num_rows):
             for j in range(self.num_cols):
-                if self.get_cur_player().board[i][j] != "X" and self.get_cur_player().board[i][j] != "O":
-                    (self.get_cur_player().board[i][j]).isalpha()
+                if self.get_cur_player().board[i][j] != "X" and self.get_cur_player().board[i][j] != "O" and (self.get_cur_player().board[i][j]).isalpha():
                     self.condition = False
-                    print("check win: other's board:\n",self.get_cur_player().board)
-                    print("in the loop:", self.condition)
+                    # print("check win: other's board:\n",self.get_cur_player().board)
+                    # print("in the loop:", self.condition)
                     return False
         return True
-        # self.condition = False
-        # for i in range(self.num_rows):
-        #     for j in range(self.num_cols):
-        #         if self.get_other_player().board[i][j] == "X" or self.get_other_player().board[i][j]  == "O" or self.get_other_player().board[i][j]  == "*":
-        #             self.condition = True
-        #             print("in the loop:",self.condition)
-        #             return self.condition
-        # return self.condition
-
 
 
 
@@ -103,4 +93,4 @@ class BattleShipGame(object):
 #display the winner
     def display_the_winner(self)->None:
         if self.someone_won():
-            print(f'{self.get_cur_player()} won the game!')
+            print(f'{self.get_other_player()} won the game!')
