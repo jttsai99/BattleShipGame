@@ -1,6 +1,7 @@
 from typing import Iterable
 from .board import Board
 from .ship import Ship
+
 import sys
 
 class Player(object):
@@ -149,12 +150,12 @@ class Player(object):
             return "Miss"
         elif other.board[int(self.x)][int(self.y)] != "*" and other.board[int(self.x)][int(self.y)] != "X" and other.board[int(self.x)][int(self.y)] != "O":
             for i in self.shipnames:
-                i= self.hitshipname
+                self.hitshipname = i
                 if other.board[int(self.x)][int(self.y)]==self.hitshipname[0]:
                     other.board[int(self.x)][int(self.y)] = "X"
-                    if self.check_destroy() == False:
+                    if self.check_destroy(other) == False:
                         return "You hit {}'s {}!".format(other,self.hitshipname)
-                    elif self.check_destroy() == True:
+                    elif self.check_destroy(other) == True:
                         return "You hit {}'s {}! You destroyed {}'s {}".format(other,self.hitshipname)
 
 #Player' object has no attribute 'hitshipname'
@@ -172,9 +173,9 @@ class Player(object):
 
 
 # this is giving us "NoneType is not iterable"
-    def add_to_scanningboard(self,other):
-        if self.check_shot_hit_miss(other) == "Miss":
+    def add_to_scanningboard(self,other,shotstatus):
+        if shotstatus == "Miss":
             self.scanningboard[self.x][self.y] = "O"
-        if "hit" in self.check_shot_hit_miss(other):
+        if "hit" in shotstatus:
             self.scanningboard[self.x][self.y] = "X"
         return self.scanningboard
