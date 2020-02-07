@@ -12,7 +12,6 @@ class Player(object):
         self.return_ship_names(self.shipconfig)  #get a list of shipName
         self.return_ship_initials(self.shipconfig) #get a list of shipInitials
         self.return_ship_lengths(self.shipconfig)   #get a list of shipLengths
-
         self.owned_ships = []   #creates a list for player's Owned ships
         for i in range(len(self.shipconfig)):       #iterates the config specified amount of time eg: how many ships there
             self.orientation = self.get_orientation(i)   #gets ship orientation by user input returns string
@@ -134,28 +133,31 @@ class Player(object):
 #####################################################################################
 #beginning gameplay methods
 
-    def get_shot_input(self)->tuple:
-        self.ishot = input(self.name,", enter the location you want to fire at in the form row, column:",sep = "")
-        self.x,self.y=self.ishot.split(sep=",")
+    def get_shot_input(self):
+        self.ishot = input(", enter the location you want to fire at in the form row, column:")
+        self.x,self.y = self.ishot.split(sep=",")
         self.inputshot = (int(self.x),int(self.y))
+        # print(type(self.x))
+        # print(type(self.y))
         return self.inputshot
 
     # must replace other.board and p2 bc idk actual variable names for opponent and opponent's board
     #also check destroy is not working properly
     def check_shot_hit_miss(self,other):
-        if other.board[self.x][self.y]=="*":
-            other.board[self.x][self.y]="O"
+        if other.board[int(self.x)][int(self.y)]== "*":
+            other.board[int(self.x)][int(self.y)]="O"
             return "Miss"
-        elif other.board[self.x][self.y] != "*" and other.board[self.x][self.y] != "X" and other.board[self.x][self.y] != "O":
-            for i in self.shipname:
+        elif other.board[int(self.x)][int(self.y)] != "*" and other.board[int(self.x)][int(self.y)] != "X" and other.board[int(self.x)][int(self.y)] != "O":
+            for i in self.shipnames:
                 i= self.hitshipname
-                if other.board[self.x][self.y]==self.hitshipname[0]:
-                    other.board[self.x][self.y] = "X"
+                if other.board[int(self.x)][int(self.y)]==self.hitshipname[0]:
+                    other.board[int(self.x)][int(self.y)] = "X"
                     if self.check_destroy() == False:
                         return "You hit {}'s {}!".format(other,self.hitshipname)
                     elif self.check_destroy() == True:
                         return "You hit {}'s {}! You destroyed {}'s {}".format(other,self.hitshipname)
 
+#Player' object has no attribute 'hitshipname'
     def check_destroy(self,other):
         for ship in self.shipnames:
             if ship == self.hitshipname:
@@ -167,11 +169,12 @@ class Player(object):
                 if self.hitshipname[0] not in destroylist:
                     return True
 
-    def add_to_scanningboard(self):
-        if self.check_shot_hit_miss() == "Miss":
+
+
+# this is giving us "NoneType is not iterable"
+    def add_to_scanningboard(self,other):
+        if self.check_shot_hit_miss(other) == "Miss":
             self.scanningboard[self.x][self.y] = "O"
-        if "hit" in self.check_shot_hit_miss():
+        if "hit" in self.check_shot_hit_miss(other):
             self.scanningboard[self.x][self.y] = "X"
         return self.scanningboard
-
-
