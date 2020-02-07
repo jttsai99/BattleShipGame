@@ -37,7 +37,7 @@ class BattleShipGame(object):
             self.display()
             self.get_cur_player().get_shot_input()
             self.get_cur_player().check_shot_hit_miss(self.get_other_player())
-            #self.get_cur_player().add_to_scanningboard(self.get_other_player())
+            self.get_cur_player().add_to_scanningboard(self.get_other_player())
             self.change_turn()
         #self.display_the_winner()
         pass

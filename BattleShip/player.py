@@ -156,7 +156,7 @@ class Player(object):
                         return "You hit {}'s {}!".format(other,self.hitshipname)
                     elif self.check_destroy() == True:
                         return "You hit {}'s {}! You destroyed {}'s {}".format(other,self.hitshipname)
-                    
+
 #Player' object has no attribute 'hitshipname'
     def check_destroy(self,other):
         for ship in self.shipnames:
