@@ -33,13 +33,14 @@ class BattleShipGame(object):
 
 #Actually Playing the Game
     def play(self)-> None:
-        while True:
+        while not self.someone_won(): # while not true = False
             self.display()
             self.get_cur_player().get_shot_input()
             self.get_cur_player().check_shot_hit_miss(self.get_other_player())
             self.get_cur_player().add_to_scanningboard()
             self.change_turn()
-        #self.display_the_winner()
+            #print(self.someone_won())
+        self.display_the_winner()
         pass
 
 
@@ -65,21 +66,6 @@ class BattleShipGame(object):
         return self.get_cur_player().scanningboard
 
 
-# #changing the turn
-#     def current_player(self) -> None:
-#         if self.current_player_index == 0:
-#             self.current_player_index = 1
-#         else:
-#             self.current_player_index = 0
-#
-#
-# #opposite player
-#     def enemy_player(self) -> None:
-#         if self.opponent_player_index == 0:
-#             self.opponent_player_index = 1
-#         else:
-#             self.opponent_player_index = 0
-
 # changes player's turn
     def change_turn(self) -> None:
         self.current_player_index = (self.current_player_index + 1) % 2
@@ -87,10 +73,20 @@ class BattleShipGame(object):
 
 #someone wins and prints somthing
     def someone_won(self)->bool:
-        return self.guessed_all()
+        return self.check_win()
 
-#someone guess all opponent ship coordinates
-    def guessed_all(self)->bool:
-        #the list of tuples of coordinates are all Xs
-        return True
-        pass
+    def check_win(self)-> bool:
+        self.condition = False
+        for i in range(self.num_rows):
+            for j in range(self.num_cols):
+                if self.get_other_player().board[i][j] == "X" or self.get_other_player().board[i][j]  == "O" or self.get_other_player().board[i][j]  == "*":
+                    self.condition = True
+                    print("in the loop:",self.condition)
+                    return self.condition
+        return self.condition
+
+
+#display the winner
+    def display_the_winner(self):
+        if self.someone_won():
+            print(f'{self.get_cur_player()} won the game!')

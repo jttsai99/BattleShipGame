@@ -61,9 +61,12 @@ class Board(object):
         return self.Board
 
 #######################################################################################################################
-#ownBoard = Board(5,5,"*")
-#print(ownBoard)
-#ownBoard[0][3] = "j"
-#print(ownBoard)
-# ownBoard.fire(0,3)
+# ownBoard = Board(5,5,"*")
+# num_rows = 5
+# num_col = 5
+# print(ownBoard)
+# for i in range(num_rows):
+#     for j in range(num_col):
+#         ownBoard[i][j] = "S"
+#         print(ownBoard)
 # print(ownBoard)
