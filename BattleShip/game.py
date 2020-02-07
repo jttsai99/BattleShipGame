@@ -7,11 +7,14 @@ class BattleShipGame(object):
         self.num_rows = num_rows
         self.num_cols = num_cols
         self.blank_char = blank_char
-        self._cur_player_turn = 0
+        self.current_player_index = 0
+        self.opponent_player_index = 1
         self.players = []
         for player_num in range(2):
             self.players.append(Player(self.players,num_rows,num_cols, blank_char))
-            self.display_own_board()
+            #self.display_own_board()
+        #print("{}'s Scanning Board: \n{}".format(self.players[self.current_player_index], self.display_scanning_board()))
+        #print("{}'s Board: \n{}".format(self.players[self.current_player_index],self.display_own_board()))
 
 
 #reads the config file (completed)
@@ -28,37 +31,59 @@ class BattleShipGame(object):
         #print(self.shipconfig)
         return self.shipconfig
 
-#actually running the Game
-    def start(self)-> None:
-        #while not self.someone_won():
-        #self.getting_shipconfig_info()
-        self.display_own_board()
-            #self._cur_player.take_turn()
+#Actually Playing the Game
+    def play(self)-> None:
+        print("{}'s Scanning Board: \n{}".format(self.players[self.current_player_index], self.display_scanning_board()))
+        print("{}'s Board: \n{}".format(self.players[self.current_player_index], self.display_own_board()))
+        self.change_turn()
+        print("{}'s Scanning Board: \n{}".format(self.players[self.current_player_index], self.display_scanning_board()))
+        print("{}'s Board: \n{}".format(self.players[self.current_player_index], self.display_own_board()))
+
+
+
+        # while not self.someone_won():
+        #     self.getting_shipconfig_info()
+        #     self.display_own_board()
             #self.change_turn()
         #self.display_the_winner()
         pass
 
-#Actually playing the game
-    def play(self)->None:
-
-
-#display the current player's own board
+#Display the current player's own board
     def display_own_board(self)-> None:
-        print(self.get_cur_player().board)
+        return self.get_cur_player().board
 
-#display opponents board
-    def display_opponent_board(self):
-        pass
+#Identify the current player
+    def get_cur_player(self) -> "Player":
+        return self.players[self.current_player_index]
 
-#changes player's turn
-    def change_turn(self)-> None:
-        self._cur_player_turn = (self._cur_player_turn + 1) % 2
+#Identify the opponent player
+    def get_other_player(self) -> "Player":
+        return self.players[self.opponent_player_index]
 
-#identify the current player
-    def get_cur_player(self)-> "Player":
-        return self.players[self._cur_player_turn]
-        pass
+#display the opponent's board (current player's scanning board)
+    def display_scanning_board(self)->None:
+        return self.get_cur_player().scanningboard
 
+
+# #changing the turn
+#     def current_player(self) -> None:
+#         if self.current_player_index == 0:
+#             self.current_player_index = 1
+#         else:
+#             self.current_player_index = 0
+#
+#
+# #opposite player
+#     def enemy_player(self) -> None:
+#         if self.opponent_player_index == 0:
+#             self.opponent_player_index = 1
+#         else:
+#             self.opponent_player_index = 0
+
+# changes player's turn
+    def change_turn(self) -> None:
+        self.current_player_index = (self.current_player_index + 1) % 2
+        self.opponent_player_index = (self.opponent_player_index + 1) % 2
 
 #someone wins and prints somthing
     def someone_won(self)->bool:
@@ -69,48 +94,3 @@ class BattleShipGame(object):
         #the list of tuples of coordinates are all Xs
         return True
         pass
-
-
-#getting cooridnates into tuples
-    def ship_coordinates(self)->tuple:
-        coords = input(
-            "Please give the coordinates where you would like to place the ship in row,column form."'\n')
-        splitcoords = coords.split(sep=',')
-        x= int(splitcoords[0])
-        y= int(splitcoords[1])
-        coordinates = (x,y)
-        return coordinates
-
-#getting orientation "horizontal" or "vertical"
-    def ship_orientation(self)->str:
-        self.orientation = str(input("Do you want your ship to be placed horizontal or vertical?"))
-        # while self.orientation not in "horizontal" or self.orientation not in "vertical":
-        #     print("ERROR: Your response must be a prefix of 'horizontal' or 'vertical'.")
-        #     self.orientation = str(input("Do you want your ship to be placed horizontal or vertical?"))
-        return self.orientation
-
-    #grabbing details from list of list and orientaion and coordinates
-
-
-    def players_place_ship(self)->None:
-        for player in self.players:
-            self.getting_shipconfig_info()
-
-    def set_up_placing_ships(self):
-        #while current player is not done placing ships
-         #   player
-        pass
-
-    # def getting_shipconfig_info(self):
-    #     shipObjectName=[]
-    #     shipObjectLength=[]
-    #     for i in self.shipconfig:
-    #         for e in i:
-    #             self.ship_orientation()
-    #             self.ship_coordinates()
-    #         f = 0
-    #         for i in self.shipconfig:
-    #              for j in i:
-    #                  self.shipObjectList.append(self.shipconfig[f][j])
-    #                  f+=1
-    #              print(self.shipObjectList)
