@@ -33,20 +33,20 @@ class BattleShipGame(object):
 
 #Actually Playing the Game
     def play(self)-> None:
-        print("{}'s Scanning Board: \n{}".format(self.players[self.current_player_index], self.display_scanning_board()))
-        print("{}'s Board: \n{}".format(self.players[self.current_player_index], self.display_own_board()))
-        self.change_turn()
-        print("{}'s Scanning Board: \n{}".format(self.players[self.current_player_index], self.display_scanning_board()))
-        print("{}'s Board: \n{}".format(self.players[self.current_player_index], self.display_own_board()))
-
-
-
-        # while not self.someone_won():
-        #     self.getting_shipconfig_info()
-        #     self.display_own_board()
-            #self.change_turn()
+        while True:
+            self.display()
+            self.get_cur_player().get_shot_input()
+            self.get_cur_player().check_shot_hit_miss(self.get_other_player())
+            #self.get_cur_player().add_to_scanningboard(self.get_other_player())
+            self.change_turn()
         #self.display_the_winner()
         pass
+
+
+#Printing Both Boards with Format
+    def display(self):
+        print("{}'s Scanning Board: \n{}".format(self.players[self.current_player_index], self.display_scanning_board()))
+        print("{}'s Board: \n{}".format(self.players[self.current_player_index], self.display_own_board()))
 
 #Display the current player's own board
     def display_own_board(self)-> None:
