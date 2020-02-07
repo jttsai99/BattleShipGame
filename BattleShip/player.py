@@ -29,8 +29,8 @@ class Player(object):
 
         print(self.get_player_name())
         print("hello bobo1: ", self.owned_ships[0])
-        print("hello bobo2: ", self.owned_ships[1])
-        print("hello bobo3: ", self.owned_ships[2])
+        #print("hello bobo2: ", self.owned_ships[1])
+        #print("hello bobo3: ", self.owned_ships[2])
 
 
     def __str__(self) -> str:
@@ -84,7 +84,7 @@ class Player(object):
 
 #ask for orientation from player,
     def get_orientation(self,i) -> str:
-        self.orientation = input("{} enter horizontal or vertical for orientation of {}  which is {} long: ".format(self.name,self.shipnames[i],self.shiplengths[i]))
+        self.orientation = input("{} enter horizontal or vertical for orientation of {} which is {} long: ".format(self.name,self.shipnames[i],self.shiplengths[i]))
         while self.orientation not in "horizontal" and self.orientation not in "vertical":
             print("ERROR: Your response must be a prefix of 'horizontal' or 'vertical'.")
             self.orientation = str(input("Do you want your ship to be placed horizontal or vertical?"))
@@ -180,9 +180,9 @@ class Player(object):
                 destroylist = []
                 for t in ship.list_coords:
                     destroylist.append(other.board[t[0]][t[1]])
-                if i[0] in destroylist:
+                if self.hitshipname[0] in destroylist:
                     return False
-                if i[0] not in destroylist:
+                if self.hitshipname[0] not in destroylist:
                     return True
 
 

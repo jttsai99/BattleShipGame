@@ -47,8 +47,8 @@ class Board(object):
                 0 <= col < self.num_cols)
 
     def fire(self,row,col):
-        if self.Board[row][col] == "*":
-            self.Board[row][col] == "o"
+        if self[row][col] == "*":
+            self[row][col] == "o"
 
     #input is a list of tuples containing coordinates where ship must be placed on board
     #for example, list = [(0,0),(0,1),(0,2)]
