@@ -40,7 +40,7 @@ class BattleShipGame(object):
 
 #Actually playing the game
     def play(self)->None:
-        pass
+
 
 #display the current player's own board
     def display_own_board(self)-> None:

@@ -185,9 +185,6 @@ class Player(object):
                 if i[0] not in destroylist:
                     return True
 
-
-
-
     def add_to_scanningboard(self):
         if self.check_shot_hit_miss() == "Miss":
             self.scanningboard[self.x][self.y] = "O"
