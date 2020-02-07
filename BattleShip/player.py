@@ -133,7 +133,7 @@ class Player(object):
 #####################################################################################
 #beginning gameplay methods
 
-    def get_shot_input(self):
+    def get_shot_input(self)->tuple:
         self.ishot = input("{}, enter the location you want to fire at in the form row, column:".format(self.name))
         self.x,self.y = self.ishot.split(sep=",")
         self.inputshot = (int(self.x),int(self.y))
@@ -142,27 +142,40 @@ class Player(object):
         return self.inputshot
 
     # must replace other.board and p2 bc idk actual variable names for opponent and opponent's board
-    #also check destroy is not working properly
-    def check_shot_hit_miss(self,other):
+    # also check destroy is not working properly
+    # other = get opposite player's board
+    def check_shot_hit_miss(self,other)->str:
+        self.status =""
         if other.board[int(self.x)][int(self.y)]== "*":
             other.board[int(self.x)][int(self.y)]="O"
-            return "Miss"
+            self.status = "Miss"
+            print(self.status)
+            return self.status
+
+
+
         elif other.board[int(self.x)][int(self.y)] != "*" and other.board[int(self.x)][int(self.y)] != "X" and other.board[int(self.x)][int(self.y)] != "O":
-            for i in self.shipnames:
+            for i in self.shipnames: #["Mouse","Cat","Dog"]
                 self.hitshipname = i
                 if other.board[int(self.x)][int(self.y)]==self.hitshipname[0]:
                     other.board[int(self.x)][int(self.y)] = "X"
                     if self.check_destroy(other) == False:
-                        return "You hit {}'s {}!".format(other,self.hitshipname)
-                    elif self.check_destroy() == True:
-                        return "You hit {}'s {}! You destroyed {}'s {}".format(other,self.hitshipname)
+                        self.status = ("You hit {}'s {}!".format(other,self.hitshipname))
+                        print(self.status)
+                        return self.status
+
+                    elif self.check_destroy(other) == True:
+                        self.status = ("You hit {}'s {}! You destroyed {}'s {}".format(other,self.hitshipname,other,self.hitshipname))
+                        print(self.status)
+                        return self.status
 
 #Player' object has no attribute 'hitshipname'
+    #other = get opposite player's board
     def check_destroy(self,other):
         for ship in self.shipnames:
             if ship == self.hitshipname:
                 destroylist = []
-                for t in ship.list_coords:
+                for t in other.owned_ships[0].list_coords:
                     destroylist.append(other.board[t[0]][t[1]])
                 if self.hitshipname[0] in destroylist:
                     return False
@@ -172,9 +185,10 @@ class Player(object):
 
 
 # this is giving us "NoneType is not iterable"
-    def add_to_scanningboard(self,other):
-        if self.check_shot_hit_miss(other) == "Miss":
-            self.scanningboard[self.x][self.y] = "O"
-        if "hit" in self.check_shot_hit_miss(other):
-            self.scanningboard[self.x][self.y] = "X"
+    #
+    def add_to_scanningboard(self):
+        if self.status == "Miss":
+            self.scanningboard[int(self.x)][int(self.y)] = "O"
+        if "hit" in self.status:
+             self.scanningboard[int(self.x)][int(self.y)] = "X"
         return self.scanningboard

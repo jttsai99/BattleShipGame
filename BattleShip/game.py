@@ -15,7 +15,7 @@ class BattleShipGame(object):
             #self.display_own_board()
         #print("{}'s Scanning Board: \n{}".format(self.players[self.current_player_index], self.display_scanning_board()))
         #print("{}'s Board: \n{}".format(self.players[self.current_player_index],self.display_own_board()))
-
+        #self.status = self.get_cur_player().check_shot_hit_miss(self.get_other_player())
 
 #reads the config file (completed)
     def read_config(self)-> list:
@@ -37,7 +37,7 @@ class BattleShipGame(object):
             self.display()
             self.get_cur_player().get_shot_input()
             self.get_cur_player().check_shot_hit_miss(self.get_other_player())
-            self.get_cur_player().add_to_scanningboard(self.get_other_player())
+            self.get_cur_player().add_to_scanningboard()
             self.change_turn()
         #self.display_the_winner()
         pass
