@@ -78,6 +78,11 @@ class Player(object):
 #ask for orientation from player,
     def get_orientation(self,i) -> str:
         self.orientation = input("{} enter horizontal or vertical for orientation of {} which is {} long: ".format(self.name,self.shipnames[i],self.shiplengths[i]))
+        self.orientation = self.orientation.lower()
+        if self.orientation in "horizontal":
+            self.orientation = "horizontal"
+        elif self.orientation in "vertical":
+            self.orientation in "vertical"
         while self.orientation not in "horizontal" and self.orientation not in "vertical":
             print("ERROR: Your response must be a prefix of 'horizontal' or 'vertical'.")
             self.orientation = str(input("Do you want your ship to be placed horizontal or vertical?"))
