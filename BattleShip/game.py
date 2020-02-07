@@ -34,6 +34,7 @@ class BattleShipGame(object):
 #Actually Playing the Game
     def play(self)-> None:
         while not self.someone_won(): # while not true = False
+        #while self.someone_won() != True:
             self.display()
             self.get_cur_player().get_shot_input()
             self.get_cur_player().check_shot_hit_miss(self.get_other_player())
@@ -76,17 +77,30 @@ class BattleShipGame(object):
         return self.check_win()
 
     def check_win(self)-> bool:
-        self.condition = False
         for i in range(self.num_rows):
             for j in range(self.num_cols):
-                if self.get_other_player().board[i][j] == "X" or self.get_other_player().board[i][j]  == "O" or self.get_other_player().board[i][j]  == "*":
-                    self.condition = True
-                    print("in the loop:",self.condition)
-                    return self.condition
-        return self.condition
+                if self.get_cur_player().board[i][j] != "X" and self.get_cur_player().board[i][j] != "O":
+                    (self.get_cur_player().board[i][j]).isalpha()
+                    self.condition = False
+                    print("check win: other's board:\n",self.get_cur_player().board)
+                    print("in the loop:", self.condition)
+                    return False
+        return True
+        # self.condition = False
+        # for i in range(self.num_rows):
+        #     for j in range(self.num_cols):
+        #         if self.get_other_player().board[i][j] == "X" or self.get_other_player().board[i][j]  == "O" or self.get_other_player().board[i][j]  == "*":
+        #             self.condition = True
+        #             print("in the loop:",self.condition)
+        #             return self.condition
+        # return self.condition
+
+
+
+
 
 
 #display the winner
-    def display_the_winner(self):
+    def display_the_winner(self)->None:
         if self.someone_won():
             print(f'{self.get_cur_player()} won the game!')
