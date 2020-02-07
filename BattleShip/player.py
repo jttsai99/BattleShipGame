@@ -134,7 +134,7 @@ class Player(object):
 #####################################################################################
 #beginning gameplay methods
 
-    def get_shot_input(self,other):
+    def get_shot_input(self)->tuple:
         self.ishot = input(self.name,", enter the location you want to fire at in the form row, column:",sep = "")
         self.x,self.y=self.ishot.split(sep=",")
         self.inputshot = (int(self.x),int(self.y))
@@ -171,7 +171,7 @@ class Player(object):
         if self.check_shot_hit_miss() == "Miss":
             self.scanningboard[self.x][self.y] = "O"
         if "hit" in self.check_shot_hit_miss():
-            self.scanningboard[self.x][self.y]
+            self.scanningboard[self.x][self.y] = "X"
         return self.scanningboard
 
 
