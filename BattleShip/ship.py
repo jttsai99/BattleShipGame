@@ -20,14 +20,14 @@ class Ship(object):
             for i in range(self.length):
                 self.list_coords.append((self.coordinates[0], self.coordinates[1] + counter))
                 counter += 1
-            print(self.list_coords)
+            #print(self.list_coords)
             return self.list_coords
 
         elif orientation == "vertical":
             for i in range(self.length):
                 self.list_coords.append((self.coordinates[0] + counter, self.coordinates[1]))
                 counter += 1
-            print(self.list_coords)
+            #print(self.list_coords)
             return self.list_coords
 
 

@@ -61,14 +61,6 @@ class Player(object):
             else:
                 print(f'{name} has been used. Pick another name.')
 
-    #def get_coordinates_from_player(self, other_player: Iterable["Player"]) -> int:
-        # already_used_coordinates = set([player.coordinates for player in other_player])
-        # while True:
-        #     name = input('Please enter your name: ')
-        #     if name not in already_used_coordinates:
-        #         return self.coordinates
-        #     else:
-        #         print(f'{self.coordinates} has been used. Pick another coordinate.')
 
 #get coordinates
 #ask for coordinates from player
@@ -90,17 +82,6 @@ class Player(object):
             self.orientation = str(input("Do you want your ship to be placed horizontal or vertical?"))
         return self.orientation
 
-
-    # def add_to_owned_ships(self):
-    #     file_path = open(sys.argv[1])
-    #     num_rows, num_cols = file_path.readline().split()
-    #     line = file_path.readline()
-    #     self.owned_ships = []
-    #     while line != "":
-    #         name, length = line.split()
-    #         self.owned_ships.append([name, length])
-    #         line = file_path.readline()
-    #     return
 # converts our list of lists to a list of shipnames
     def return_ship_names(self,list):
         self.first=[]
@@ -149,6 +130,7 @@ class Player(object):
     #get the player's name
     def get_player_name(self):
         return self.name
+
 #####################################################################################
 #beginning gameplay methods
 
