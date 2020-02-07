@@ -8,7 +8,7 @@ class Player(object):
         self.shipconfig = self.read_config()        #reads config file and return [["Mouse",'1'],....]
         self.name = self.get_name_from_player(other_players) #gets player name
         self.board = Board(num_rows,num_cols,blank_char)    #initializes player's own board
-
+        self.scanningboard = Board(num_rows,num_cols,blank_char)
         self.return_ship_names(self.shipconfig)  #get a list of shipName
         self.return_ship_initials(self.shipconfig) #get a list of shipInitials
         self.return_ship_lengths(self.shipconfig)   #get a list of shipLengths
@@ -152,10 +152,11 @@ class Player(object):
 #####################################################################################
 #beginning gameplay methods
 
-    def get_shot_input(self):
-        self.inputshot = input(p1,", enter the location you want to fire at in the form row, column:",sep = "")
-        self.x,self.y=self.inputshot.split(sep=",")
-        return (int(self.x),int(self.y))
+    def get_shot_input(self,other):
+        self.ishot = input(self.name,", enter the location you want to fire at in the form row, column:",sep = "")
+        self.x,self.y=self.ishot.split(sep=",")
+        self.inputshot = (int(self.x),int(self.y))
+        return self.inputshot
 
     # must replace other.board and p2 bc idk actual variable names for opponent and opponent's board
     #also check destroy is not working properly
@@ -165,9 +166,33 @@ class Player(object):
             return "Miss"
         elif other.board[self.x][self.y] != "*" and other.board[self.x][self.y] != "X" and other.board[self.x][self.y] != "O":
             for i in self.shipname:
-                if other.board[self.x][self.y]==i[0]:
+                i= self.hitshipname
+                if other.board[self.x][self.y]==self.hitshipname[0]:
                     other.board[self.x][self.y] = "X"
-                    return "You hit {}'s {}!".format(p2,i)
+                    if self.check_destroy() == False:
+                        return "You hit {}'s {}!".format(other,self.hitshipname)
+                    elif self.check_destroy() == True:
+                        return "You hit {}'s {}! You destroyed {}'s {}".format(other,self.hitshipname)
 
-    def check_destroy(self):
-        pass
+    def check_destroy(self,other):
+        for ship in self.shipnames:
+            if ship == self.hitshipname:
+                destroylist = []
+                for t in ship.list_coords:
+                    destroylist.append(other.board[t[0]][t[1]])
+                if i[0] in destroylist:
+                    return False
+                if i[0] not in destroylist:
+                    return True
+
+
+
+
+    def add_to_scanningboard(self):
+        if self.check_shot_hit_miss() == "Miss":
+            self.scanningboard[self.x][self.y] = "O"
+        if "hit" in self.check_shot_hit_miss():
+            self.scanningboard[self.x][self.y]
+        return self.scanningboard
+
+
