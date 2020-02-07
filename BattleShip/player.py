@@ -134,7 +134,7 @@ class Player(object):
 #beginning gameplay methods
 
     def get_shot_input(self):
-        self.ishot = input(", enter the location you want to fire at in the form row, column:")
+        self.ishot = input("{}, enter the location you want to fire at in the form row, column:".format(self.name))
         self.x,self.y = self.ishot.split(sep=",")
         self.inputshot = (int(self.x),int(self.y))
         # print(type(self.x))
@@ -149,10 +149,10 @@ class Player(object):
             return "Miss"
         elif other.board[int(self.x)][int(self.y)] != "*" and other.board[int(self.x)][int(self.y)] != "X" and other.board[int(self.x)][int(self.y)] != "O":
             for i in self.shipnames:
-                i= self.hitshipname
+                self.hitshipname = i
                 if other.board[int(self.x)][int(self.y)]==self.hitshipname[0]:
                     other.board[int(self.x)][int(self.y)] = "X"
-                    if self.check_destroy() == False:
+                    if self.check_destroy(other) == False:
                         return "You hit {}'s {}!".format(other,self.hitshipname)
                     elif self.check_destroy() == True:
                         return "You hit {}'s {}! You destroyed {}'s {}".format(other,self.hitshipname)
