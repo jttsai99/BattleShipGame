@@ -83,6 +83,17 @@ class Player(object):
             self.orientation = str(input("Do you want your ship to be placed horizontal or vertical?"))
         return self.orientation
 
+
+
+
+
+
+
+
+
+
+
+
 # converts our list of lists to a list of shipnames
     def return_ship_names(self,list):
         self.first=[]
