@@ -41,6 +41,7 @@ class BattleShipGame(object):
             self.get_cur_player().add_to_scanningboard()
             self.change_turn()
             #print(self.someone_won())
+        self.display_last()
         self.display_the_winner()
         pass
 
@@ -49,6 +50,11 @@ class BattleShipGame(object):
     def display(self):
         print("{}'s Scanning Board: \n{}".format(self.players[self.current_player_index], self.display_scanning_board()))
         print("{}'s Board: \n{}".format(self.players[self.current_player_index], self.display_own_board()))
+
+#Printing last Boards
+    def display_last(self):
+        print("{}'s Scanning Board: \n{}".format(self.players[self.opponent_player_index], self.final_scanning_board()))
+        print("{}'s Board: \n{}".format(self.players[self.opponent_player_index], self.final_board()))
 
 #Display the current player's own board
     def display_own_board(self)-> None:
@@ -65,6 +71,14 @@ class BattleShipGame(object):
 #display the opponent's board (current player's scanning board)
     def display_scanning_board(self)->None:
         return self.get_cur_player().scanningboard
+
+#Final own board
+    def final_board(self):
+        return self.get_other_player().board
+
+# Final own board
+    def final_scanning_board(self):
+        return self.get_other_player().scanningboard
 
 
 # changes player's turn

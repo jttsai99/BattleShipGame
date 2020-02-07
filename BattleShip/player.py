@@ -6,8 +6,9 @@ import sys
 class Player(object):
     def __init__(self,other_players: Iterable["Player"],num_rows:int,num_cols:int, blank_char: str= "*") -> None:
         self.shipconfig = self.read_config()        #reads config file and return [["Mouse",'1'],....]
-        self.name = self.get_name_from_player(other_players) #gets player name
+        self.name = self.get_name_from_player(other_players)#gets player name
         self.board = Board(num_rows,num_cols,blank_char)    #initializes player's own board
+        self.display_own_board()
         self.scanningboard = Board(num_rows,num_cols,blank_char)
         self.return_ship_names(self.shipconfig)  #get a list of shipName
         self.return_ship_initials(self.shipconfig) #get a list of shipInitials
@@ -15,7 +16,7 @@ class Player(object):
         self.owned_ships = []   #creates a list for player's Owned ships
         for i in range(len(self.shipconfig)):       #iterates the config specified amount of time eg: how many ships there
             self.orientation = self.get_orientation(i)   #gets ship orientation by user input returns string
-            self.coordinates = self.get_starting_coordinates()  #get coordinates by user input return tuple
+            self.coordinates = self.get_starting_coordinates(i)  #get coordinates by user input return tuple
             self.owned_ships.append(
                 Ship(self.shipnames[i],self.shipinitials[i], int(self.shiplengths[i]), self.orientation, self.coordinates))
             #appends each ship to Owned Ship list by giving (name,initals,length,orientation,coordinates)
@@ -26,8 +27,10 @@ class Player(object):
             #displays the own board
             self.display_own_board()
 
-        print(self.get_player_name())
-        print("hello bobo1: ", self.owned_ships[0])
+        #print(self.get_player_name())
+
+        ##prints out the ship infos
+        #print("hello bobo1: ", self.owned_ships[0])
         #print("hello bobo2: ", self.owned_ships[1])
         #print("hello bobo3: ", self.owned_ships[2])
 
@@ -47,7 +50,7 @@ class Player(object):
             name, length = line.split()
             shipconfig.append([name, length])
             line = file_path.readline()
-        print(shipconfig)
+        #print(shipconfig)
         return shipconfig
 
 #ask player for their name
@@ -60,12 +63,11 @@ class Player(object):
             else:
                 print(f'{name} has been used. Pick another name.')
 
-
 #get coordinates
 #ask for coordinates from player
-    def get_starting_coordinates(self)->tuple:
+    def get_starting_coordinates(self,i)->tuple:
         coords = input(
-            "Please give the coordinates where you would like to place the ship in row,column form."'\n')
+            "{}, enter the starting position for your {} ship, which is {} long, in the form row, column: ".format(self.name,self.shipnames[i],self.shiplengths[i]))
         splitcoords = coords.split(sep=',')
         x= int(splitcoords[0])
         y= int(splitcoords[1])
@@ -91,7 +93,7 @@ class Player(object):
         for i in range(len(self.first)):
             if i %2 ==0:
                 self.shipnames.append(self.first[i])
-        print(self.shipnames)
+        #print(self.shipnames)
         return self.shipnames
 
 #converts our list of lists to a list of first letters
@@ -104,7 +106,7 @@ class Player(object):
         for i in range(len(self.second)):
             if i %2 ==0:
                 self.shipinitials.append(self.second[i])
-        print(self.shipinitials)
+        #print(self.shipinitials)
         return self.shipinitials
 
 #converts our list of lists to a list of ship lengths
@@ -117,13 +119,14 @@ class Player(object):
         for i in range(len(self.third)):
             if i %2 ==1:
                 self.shiplengths.append(self.third[i])
-        print(self.shiplengths)
+        #print(self.shiplengths)
         return self.shiplengths
 
 
 #display player's Placement Board
     def display_own_board(self):
         #print("{}'s Placement Board".format(self.name))
+        print("{}'s Placement Board".format(self.name))
         print(self.board)
 
     #get the player's name
