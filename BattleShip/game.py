@@ -11,7 +11,7 @@ class BattleShipGame(object):
         self.opponent_player_index = 1
         self.players = []
         for player_num in range(2):
-            self.players.append(Player(self.players,num_rows,num_cols, blank_char))
+            self.players.append(Player(self.players,num_rows,num_cols,player_num+1,blank_char))
             #self.display_own_board()
         #print("{}'s Scanning Board: \n{}".format(self.players[self.current_player_index], self.display_scanning_board()))
         #print("{}'s Board: \n{}".format(self.players[self.current_player_index],self.display_own_board()))
@@ -39,6 +39,7 @@ class BattleShipGame(object):
             self.get_cur_player().get_shot_input()
             self.get_cur_player().check_shot_hit_miss(self.get_other_player())
             self.get_cur_player().add_to_scanningboard()
+            self.display
             self.change_turn()
             #print(self.someone_won())
         self.display_last()
@@ -48,8 +49,8 @@ class BattleShipGame(object):
 
 #Printing Both Boards with Format
     def display(self):
-        print("{}'s Scanning Board: \n{}".format(self.players[self.current_player_index], self.display_scanning_board()))
-        print("{}'s Board: \n{}".format(self.players[self.current_player_index], self.display_own_board()))
+        print("{}'s Scanning Board \n{}".format(self.players[self.current_player_index], self.display_scanning_board()))
+        print("{}'s Board \n{}".format(self.players[self.current_player_index], self.display_own_board()))
 
 #Printing last Boards
     def display_last(self):

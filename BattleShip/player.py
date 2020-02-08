@@ -4,8 +4,9 @@ from .ship import Ship
 import sys
 
 class Player(object):
-    def __init__(self,other_players: Iterable["Player"],num_rows:int,num_cols:int, blank_char: str= "*") -> None:
+    def __init__(self,other_players: Iterable["Player"],num_rows:int,num_cols:int,count, blank_char: str= "*") -> None:
         self.shipconfig = self.read_config()        #reads config file and return [["Mouse",'1'],....]
+        self.count = count
         self.name = self.get_name_from_player(other_players)#gets player name
         self.board = Board(num_rows,num_cols,blank_char)    #initializes player's own board
         self.display_own_board()
@@ -57,7 +58,8 @@ class Player(object):
     def get_name_from_player(self,other_player: Iterable["Player"])->str:
         already_used_names = set([player.name for player in other_player])
         while True:
-            name = input('Player please enter your name: ')
+
+            name = input('Player {} please enter your name: '.format(self.count))
             if name not in already_used_names:
                 return name
             else:
