@@ -33,33 +33,57 @@ class BattleShipGame(object):
 
 #Actually Playing the Game
     def play(self)-> None:
+        self.display_first()
         while not self.someone_won(): # while not true = False
         #while self.someone_won() != True:
-            self.display()
             self.get_cur_player().get_shot_input()
             self.get_cur_player().check_shot_hit_miss(self.get_other_player())
             self.get_cur_player().add_to_scanningboard()
-            self.display
+            self.display_current() #display current player's boards
+            self.display_opponent() #display the other player's board
             self.change_turn()
             #print(self.someone_won())
-        self.display_last()
+        # self.display_last()
         self.display_the_winner()
         pass
 
-
-#Printing Both Boards with Format
-    def display(self):
+#First time displaying board
+    def display_first(self):
         print("{}'s Scanning Board \n{}".format(self.players[self.current_player_index], self.display_scanning_board()))
         print("{}'s Board \n{}".format(self.players[self.current_player_index], self.display_own_board()))
 
+
+#Printing Both Boards with Format
+    def display_current(self):
+        print("{}'s Scanning Board \n{}".format(self.players[self.current_player_index], self.display_scanning_board()))
+        print("{}'s Board \n{}".format(self.players[self.current_player_index], self.display_own_board()))
+
+
+    def display_opponent(self):
+        print("{}'s Scanning Board \n{}".format(self.players[self.opponent_player_index], self.display_other_scanning_board()))
+        print("{}'s Board \n{}".format(self.players[self.opponent_player_index], self.display_enemy_board()))
+
 #Printing last Boards
     def display_last(self):
-        print("{}'s Scanning Board: \n{}".format(self.players[self.opponent_player_index], self.final_scanning_board()))
-        print("{}'s Board: \n{}".format(self.players[self.opponent_player_index], self.final_board()))
+        print("{}'s Scanning Board \n{}".format(self.players[self.opponent_player_index], self.final_scanning_board()))
+        print("{}'s Board \n{}".format(self.players[self.opponent_player_index], self.final_board()))
 
 #Display the current player's own board
-    def display_own_board(self)-> None:
+    def display_own_board(self):
         return self.get_cur_player().board
+
+#Display the other player's own board
+    def display_enemy_board(self):
+        return self.get_other_player().board
+
+#Display the other player's scanning board
+    def display_other_scanning_board(self)->None:
+        return self.get_other_player().scanningboard
+
+# Display current player's scanning board
+    def display_scanning_board(self) -> None:
+        return self.get_cur_player().scanningboard
+
 
 #Identify the current player
     def get_cur_player(self) -> "Player":
@@ -69,9 +93,7 @@ class BattleShipGame(object):
     def get_other_player(self) -> "Player":
         return self.players[self.opponent_player_index]
 
-#display the opponent's board (current player's scanning board)
-    def display_scanning_board(self)->None:
-        return self.get_cur_player().scanningboard
+
 
 #Final own board
     def final_board(self):
@@ -92,14 +114,15 @@ class BattleShipGame(object):
         return self.check_win()
 
     def check_win(self)-> bool:
+        self.condition = True
         for i in range(self.num_rows):
             for j in range(self.num_cols):
                 if self.get_cur_player().board[i][j] != "X" and self.get_cur_player().board[i][j] != "O" and (self.get_cur_player().board[i][j]).isalpha():
                     self.condition = False
                     # print("check win: other's board:\n",self.get_cur_player().board)
                     # print("in the loop:", self.condition)
-                    return False
-        return True
+                    return self.condition
+        return self.condition
 
 
 

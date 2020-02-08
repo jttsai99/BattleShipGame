@@ -69,7 +69,7 @@ class Player(object):
 #ask for coordinates from player
     def get_starting_coordinates(self,i)->tuple:
         coords = input(
-            "{}, enter the starting position for your {} ship, which is {} long, in the form row, column: ".format(self.name,self.shipnames[i],self.shiplengths[i]))
+            "{}, enter the starting position for your {} ship ,which is {} long, in the form row, column: ".format(self.name,self.shipnames[i],self.shiplengths[i]))
         splitcoords = coords.split(sep=',')
         x= int(splitcoords[0])
         y= int(splitcoords[1])
@@ -86,21 +86,12 @@ class Player(object):
             self.orientation = "vertical"
         while self.orientation.lower() not in "horizontal" and self.orientation.lower() not in "vertical":
             print(self.orientation, "does not represent an Orientation")
-            self.orientation = input("{} enter horizontal or vertical for orientation of {} which is {} long: ".format(self.name,self.shipnames[i],self.shiplengths[i]))
+            self.orientation = input("{} enter horizontal or vertical for the orientation of {} which is {} long: ".format(self.name,self.shipnames[i],self.shiplengths[i]))
             if self.orientation.lower() in "horizontal":
                 self.orientation = "horizontal"
             elif self.orientation.lower() in "vertical":
                 self.orientation = "vertical"
         return self.orientation
-
-
-
-
-
-
-
-
-
 
 
 
@@ -148,7 +139,7 @@ class Player(object):
     def display_own_board(self):
         #print("{}'s Placement Board".format(self.name))
         print("{}'s Placement Board".format(self.name))
-        print(self.board)
+        print(self.board,end="")
 
     #get the player's name
     def get_player_name(self):
