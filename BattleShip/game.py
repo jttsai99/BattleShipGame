@@ -33,24 +33,27 @@ class BattleShipGame(object):
 
 #Actually Playing the Game
     def play(self)-> None:
-        self.display_first()
-        while not self.someone_won(): # while not true = False
+        self.display_current()
+        while True:
         #while self.someone_won() != True:
             self.get_cur_player().get_shot_input()
             self.get_cur_player().check_shot_hit_miss(self.get_other_player())
             self.get_cur_player().add_to_scanningboard()
-            self.display_current() #display current player's boards
+            if self.is_cur_player_winner(self.get_other_player()):
+                self.display_current()
+                print(f'{self.get_other_player()} won the game!')
+                break
             self.display_opponent() #display the other player's board
             self.change_turn()
             #print(self.someone_won())
         # self.display_last()
-        self.display_the_winner()
-        pass
+        #self.display_the_winner()
+        #pass
 
-#First time displaying board
-    def display_first(self):
-        print("{}'s Scanning Board \n{}".format(self.players[self.current_player_index], self.display_scanning_board()))
-        print("{}'s Board \n{}".format(self.players[self.current_player_index], self.display_own_board()))
+# #First time displaying board
+#     def display_first(self):
+#         print("{}'s Scanning Board \n{}".format(self.players[self.current_player_index], self.display_scanning_board()))
+#         print("{}'s Board \n{}".format(self.players[self.current_player_index], self.display_own_board()))
 
 
 #Printing Both Boards with Format
@@ -130,5 +133,19 @@ class BattleShipGame(object):
 
 #display the winner
     def display_the_winner(self)->None:
-        if self.someone_won():
-            print(f'{self.get_other_player()} won the game!')
+        self.winner = self.get_other_player()
+        # if self.someone_won():
+        #     print(f'{self.get_other_player()} won the game!')
+
+
+    def is_cur_player_winner(self,other)->bool:
+        self.condition = True
+        for i in range(self.num_rows):
+            for j in range(self.num_cols):
+                if other.board[i][j] != "X" and other.board[i][j] != "O" and (
+                        other.board[i][j]).isalpha():
+                    self.condition = False
+                    # print("check win: other's board:\n",self.get_cur_player().board)
+                    # print("in the loop:", self.condition)
+                    return self.condition
+        return self.condition
