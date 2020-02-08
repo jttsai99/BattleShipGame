@@ -63,7 +63,7 @@ class Player(object):
             if name not in already_used_names:
                 return name
             else:
-                print(f'{name} has been used. Pick another name.')
+                print('Someone is already using {} for their name.\nPlease choose another name.'.format(name))
 
 #get coordinates
 #ask for coordinates from player
@@ -209,7 +209,6 @@ class Player(object):
 
 
 # this is giving us "NoneType is not iterable"
-    #
     def add_to_scanningboard(self):
         if self.status == "Miss":
             self.scanningboard[int(self.x)][int(self.y)] = "O"
