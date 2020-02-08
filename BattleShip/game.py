@@ -39,9 +39,9 @@ class BattleShipGame(object):
             self.get_cur_player().get_shot_input()
             self.get_cur_player().check_shot_hit_miss(self.get_other_player())
             self.get_cur_player().add_to_scanningboard()
+            self.display_current()
             if self.is_cur_player_winner(self.get_other_player()):
-                self.display_current()
-                print(f'{self.get_other_player()} won the game!')
+                print(f'{self.get_cur_player()} won the game!')
                 break
             self.display_opponent() #display the other player's board
             self.change_turn()
@@ -58,18 +58,18 @@ class BattleShipGame(object):
 
 #Printing Both Boards with Format
     def display_current(self):
-        print("{}'s Scanning Board\n{}".format(self.players[self.current_player_index], self.display_scanning_board()),end="")
-        print("{}'s Board\n{}".format(self.players[self.current_player_index], self.display_own_board()),end="")
+        print("{}'s Scanning Board\n{}\n".format(self.players[self.current_player_index], self.display_scanning_board()),end="")
+        print("{}'s Board\n{}\n".format(self.players[self.current_player_index], self.display_own_board()),end="")
 
 
     def display_opponent(self):
-        print("{}'s Scanning Board\n{}".format(self.players[self.opponent_player_index], self.display_other_scanning_board()),end="")
-        print("{}'s Board\n{}".format(self.players[self.opponent_player_index], self.display_enemy_board()),end="")
+        print("{}'s Scanning Board\n{}\n".format(self.players[self.opponent_player_index], self.display_other_scanning_board()),end="")
+        print("{}'s Board\n{}\n".format(self.players[self.opponent_player_index], self.display_enemy_board()),end="")
 
 #Printing last Boards
     def display_last(self):
-        print("{}'s Scanning Board\n{}".format(self.players[self.opponent_player_index], self.final_scanning_board()))
-        print("{}'s Board\n{}".format(self.players[self.opponent_player_index], self.final_board()))
+        print("{}'s Scanning Board\n{}\n".format(self.players[self.opponent_player_index], self.final_scanning_board()))
+        print("{}'s Board\n{}\n".format(self.players[self.opponent_player_index], self.final_board()))
 
 #Display the current player's own board
     def display_own_board(self):

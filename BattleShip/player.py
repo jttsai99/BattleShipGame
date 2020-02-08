@@ -163,12 +163,9 @@ class Player(object):
         self.status =""
         if other.board[int(self.x)][int(self.y)]== "*":
             other.board[int(self.x)][int(self.y)]="O"
-            self.status = "Miss"
+            self.status = " Miss"
             print(self.status)
             return self.status
-
-
-
         elif other.board[int(self.x)][int(self.y)] != "*" and other.board[int(self.x)][int(self.y)] != "X" and other.board[int(self.x)][int(self.y)] != "O":
             for i in self.shipnames: #["Mouse","Cat","Dog"]
                 self.hitshipname = i
@@ -178,9 +175,8 @@ class Player(object):
                         self.status = ("You hit {}'s {}!".format(other,self.hitshipname))
                         print(self.status)
                         return self.status
-
                     elif self.check_destroy(other) == True:
-                        self.status = ("You hit {}'s {}! You destroyed {}'s {}".format(other,self.hitshipname,other,self.hitshipname))
+                        self.status = (" You hit {}'s {}!\nYou destroyed {}'s {}".format(other,self.hitshipname,other,self.hitshipname))
                         print(self.status)
                         return self.status
 
@@ -201,7 +197,7 @@ class Player(object):
 
 # this is giving us "NoneType is not iterable"
     def add_to_scanningboard(self):
-        if self.status == "Miss":
+        if self.status == " Miss":
             self.scanningboard[int(self.x)][int(self.y)] = "O"
         if "hit" in self.status:
              self.scanningboard[int(self.x)][int(self.y)] = "X"
