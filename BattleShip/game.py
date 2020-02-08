@@ -58,18 +58,18 @@ class BattleShipGame(object):
 
 #Printing Both Boards with Format
     def display_current(self):
-        print("{}'s Scanning Board \n{}".format(self.players[self.current_player_index], self.display_scanning_board()))
-        print("{}'s Board \n{}".format(self.players[self.current_player_index], self.display_own_board()))
+        print("{}'s Scanning Board\n{}".format(self.players[self.current_player_index], self.display_scanning_board()),end="")
+        print("{}'s Board\n{}".format(self.players[self.current_player_index], self.display_own_board()),end="")
 
 
     def display_opponent(self):
-        print("{}'s Scanning Board \n{}".format(self.players[self.opponent_player_index], self.display_other_scanning_board()))
-        print("{}'s Board \n{}".format(self.players[self.opponent_player_index], self.display_enemy_board()))
+        print("{}'s Scanning Board\n{}".format(self.players[self.opponent_player_index], self.display_other_scanning_board()),end="")
+        print("{}'s Board\n{}".format(self.players[self.opponent_player_index], self.display_enemy_board()),end="")
 
 #Printing last Boards
     def display_last(self):
-        print("{}'s Scanning Board \n{}".format(self.players[self.opponent_player_index], self.final_scanning_board()))
-        print("{}'s Board \n{}".format(self.players[self.opponent_player_index], self.final_board()))
+        print("{}'s Scanning Board\n{}".format(self.players[self.opponent_player_index], self.final_scanning_board()))
+        print("{}'s Board\n{}".format(self.players[self.opponent_player_index], self.final_board()))
 
 #Display the current player's own board
     def display_own_board(self):

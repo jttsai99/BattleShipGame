@@ -79,7 +79,7 @@ class Player(object):
 
 #ask for orientation from player,
     def get_orientation(self,i) -> str:
-        self.orientation = input("{} enter horizontal or vertical for orientation of {} which is {} long: ".format(self.name,self.shipnames[i],self.shiplengths[i]))
+        self.orientation = input("{} enter horizontal or vertical for the orientation of {} which is {} long: ".format(self.name,self.shipnames[i],self.shiplengths[i]))
         if self.orientation.lower() in "horizontal":
             self.orientation = "horizontal"
         elif self.orientation.lower() in "vertical":
